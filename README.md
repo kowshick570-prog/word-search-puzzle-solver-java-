@@ -114,8 +114,11 @@ BAG -> FOUND at: (2,0) (2,1) (1,1)
 ## 📂 Project Structure
 
 ```
-word-search-puzzle-solver/
-├── WordSearchPuzzleSolver.java   # Grid, WordSearchSolver, and main() — single file
+word-search-puzzle-solver-java-/
+├── docs/
+│   ├── class-diagram.png
+│   ├── sample-output.txt
+│   └── WordSearchPuzzleSolver.java
 └── README.md
 ```
 
