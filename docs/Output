@@ -1,0 +1,12 @@
+Grid:
+C A T F 
+X O D O 
+B G D G 
+E R A S 
+
+CAT -> FOUND at: (0,0) (0,1) (0,2)
+DOG -> FOUND at: (1,2) (1,1) (2,1)
+DODGE -> FOUND at: (1,2) (1,1) (2,2) (2,1) (3,0)
+BAG -> NOT FOUND
+
+=== Code Execution Successful ===
