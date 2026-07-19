@@ -134,7 +134,8 @@ word-search-puzzle-solver-java-/
 
 ## 🙋 Author
 
-**Kowshick K** — Reg. No. 711524BEE302
+**Kowshick K** 
+
 
 ---
 
