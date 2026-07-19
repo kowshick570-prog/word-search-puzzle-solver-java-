@@ -1,0 +1,136 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Grid {
+    private final char[][] board;   
+    private final int rows;
+    private final int cols;
+
+    public Grid(char[][] board) {
+        this.board = board;
+        this.rows = board.length;
+        this.cols = board[0].length;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public char charAt(int row, int col) {
+        return board[row][col];
+    }
+
+    public boolean isInBounds(int row, int col) {
+        return row >= 0 && row < rows && col >= 0 && col < cols;
+    }
+
+    public void print() {
+        for (char[] row : board) {
+            for (char c : row) {
+                System.out.print(c + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+class WordSearchSolver {
+
+    private static final int[][] DIRECTIONS = {
+            {-1, 0}, {1, 0}, {0, -1}, {0, 1},
+            {-1, -1}, {-1, 1}, {1, -1}, {1, 1}
+    };
+
+    private final Grid grid;
+    public WordSearchSolver(Grid grid) {
+        this.grid = grid;
+    }
+
+    public List<int[]> findWord(String word) {
+        if (word == null || word.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        boolean[][] visited = new boolean[grid.getRows()][grid.getCols()];
+
+        for (int r = 0; r < grid.getRows(); r++) {
+            for (int c = 0; c < grid.getCols(); c++) {
+                if (grid.charAt(r, c) == word.charAt(0)) {
+                    List<int[]> path = new ArrayList<>();
+                    if (backtrack(r, c, word, 0, visited, path)) {
+                        return path;
+                    }
+                }
+            }
+        }
+        return new ArrayList<>();
+    }
+
+    private boolean backtrack(int row, int col, String word, int index,
+                               boolean[][] visited, List<int[]> path) {
+
+        if (!grid.isInBounds(row, col) || visited[row][col]) {
+            return false;
+        }
+        if (grid.charAt(row, col) != word.charAt(index)) {
+            return false;
+        }
+
+        visited[row][col] = true;
+        path.add(new int[]{row, col});
+
+        if (index == word.length() - 1) {
+            return true;
+        }
+
+        for (int[] dir : DIRECTIONS) {
+            int nextRow = row + dir[0];
+            int nextCol = col + dir[1];
+            if (backtrack(nextRow, nextCol, word, index + 1, visited, path)) {
+                return true;
+            }
+        }
+
+        visited[row][col] = false;
+        path.remove(path.size() - 1);
+        return false;
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        char[][] board = {
+                {'C', 'A', 'T', 'F'},
+                {'X', 'O', 'D', 'O'},
+                {'B', 'G', 'D', 'G'},
+                {'E', 'R', 'A', 'S'}
+        };
+
+        String[] wordsToFind = {"CAT", "DOG", "DODGE", "BAG"};
+
+        Grid grid = new Grid(board);                
+        WordSearchSolver solver = new WordSearchSolver(grid);
+        System.out.println("Grid:");
+        grid.print();
+        System.out.println();
+
+        for (String word : wordsToFind) {
+            List<int[]> path = solver.findWord(word);
+            if (path.isEmpty()) {
+                System.out.println(word + " -> NOT FOUND");
+            } else {
+                StringBuilder sb = new StringBuilder(word + " -> FOUND at: ");
+                for (int[] coord : path) {
+                    sb.append("(").append(coord[0]).append(",").append(coord[1]).append(") ");
+                }
+                System.out.println(sb.toString().trim());
+            }
+        }
+    }
+}
