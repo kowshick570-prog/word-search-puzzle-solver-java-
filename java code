@@ -1,23 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * WordSearchPuzzleSolver.java
- *
- * Single-file version — everything combined here.
- * Concepts used: 2D Array, Backtracking, Classes & Objects (OOP).
- *
- * 3 classes are defined:
- *   1. Grid              -> represents the letter board (an OBJECT)
- *   2. WordSearchSolver  -> contains the backtracking logic (an OBJECT)
- *   3. Main               -> the driver class with main() method
- *
- * Only ONE public class allowed per file in Java (must match filename),
- * so Main is public, and Grid / WordSearchSolver are package-private
- * classes living in the same file.
- */
-
-// ---------------------- CLASS 1: Grid ----------------------
 class Grid {
     private final char[][] board;   // fields (state of the object)
     private final int rows;
@@ -55,8 +37,6 @@ class Grid {
         }
     }
 }
-
-// ---------------------- CLASS 2: WordSearchSolver ----------------------
 class WordSearchSolver {
 
     private static final int[][] DIRECTIONS = {
@@ -122,8 +102,7 @@ class WordSearchSolver {
     }
 }
 
-// ---------------------- CLASS 3: Main (driver) ----------------------
-public class WordSearchPuzzleSolver {
+public class Main {
     public static void main(String[] args) {
 
         char[][] board = {
